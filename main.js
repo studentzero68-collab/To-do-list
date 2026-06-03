@@ -55,6 +55,7 @@ function CreateNewTodo() {
         id: new Date().getTime(),
         text: "",
         status: "incomplete",
+        dueDate: ""
     };
 
     todos.unshift(item);
@@ -121,6 +122,16 @@ function CreateTodoElement(item) {
 
     input_el.setAttribute("disabled", "");
 
+    const date_el = document.createElement("input");
+
+    date_el.type = "date";
+    date_el.value = item.dueDate || "";
+
+    date_el.addEventListener("change", () => {
+    item.dueDate = date_el.value;
+    save();
+});
+
     const actions_el = document.createElement("div");
 
     actions_el.classList.add("actions");
@@ -145,6 +156,7 @@ function CreateTodoElement(item) {
 
     item_el.appendChild(status_btn_el);
     item_el.appendChild(input_el);
+    item_el.appendChild(date_el);
     item_el.appendChild(actions_el);
 
     input_el.addEventListener("input", () => {
@@ -176,6 +188,32 @@ function CreateTodoElement(item) {
         save();
 
     });
+
+    remove_btn_el.addEventListener("click", () => {
+
+    todos = todos.filter((t) => t.id !== item.id);
+
+    item_el.remove();
+
+    save();
+
+});
+
+// Highlight overdue tasks
+if (
+    item.dueDate &&
+    new Date(item.dueDate) < new Date() &&
+    item.status !== "complete"
+) {
+    item_el.style.border = "2px solid red";
+}
+
+return {
+    item_el,
+    input_el,
+    edit_btn_el,
+    remove_btn_el
+};
 
     return {
         item_el,
