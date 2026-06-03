@@ -55,6 +55,7 @@ function CreateNewTodo() {
         id: new Date().getTime(),
         text: "",
         status: "incomplete",
+        dueDate: ""
     };
 
     todos.unshift(item);
@@ -76,6 +77,8 @@ function CreateTodoElement(item) {
 
     item_el.classList.add("item");
     item_el.classList.add(item.status);
+
+    item.dueDate = item.dueDate || "";
 
     const status_btn_el = document.createElement("button");
 
@@ -121,6 +124,16 @@ function CreateTodoElement(item) {
 
     input_el.setAttribute("disabled", "");
 
+    // ✅ NEW: due date input
+    const date_el = document.createElement("input");
+    date_el.type = "date";
+    date_el.value = item.dueDate || "";
+
+    date_el.addEventListener("change", () => {
+        item.dueDate = date_el.value;
+        save();
+    });
+
     const actions_el = document.createElement("div");
 
     actions_el.classList.add("actions");
@@ -145,6 +158,7 @@ function CreateTodoElement(item) {
 
     item_el.appendChild(status_btn_el);
     item_el.appendChild(input_el);
+    item_el.appendChild(date_el); // ✅ NEW LINE
     item_el.appendChild(actions_el);
 
     input_el.addEventListener("input", () => {
