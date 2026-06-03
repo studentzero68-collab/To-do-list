@@ -179,6 +179,12 @@ main {
     margin-right: 0;
 }
 
+.item input[type="date"] {
+    margin-right: 1rem;
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
 /* Due date input styling */
 .item input[type="date"] {
     margin-right: 1rem;
