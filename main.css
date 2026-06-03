@@ -185,4 +185,20 @@ main {
     border-radius: 5px;
     border: none;
     outline: none;
+/* Due date input styling */
+.item input[type="date"] {
+    margin-right: 1rem;
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background: #1d1d3d;
+    color: white;
+    font-size: 14px;
+}
+
+/* Make calendar icon visible in dark theme */
+.item input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
 }

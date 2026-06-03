@@ -78,6 +78,8 @@ function CreateTodoElement(item) {
     item_el.classList.add("item");
     item_el.classList.add(item.status);
 
+    item.dueDate = item.dueDate || "";
+
     const status_btn_el = document.createElement("button");
 
     status_btn_el.classList.add("status-btn");
@@ -124,6 +126,8 @@ function CreateTodoElement(item) {
 
     const date_el = document.createElement("input");
 
+    // ✅ NEW: due date input
+    const date_el = document.createElement("input");
     date_el.type = "date";
     date_el.value = item.dueDate || "";
 
@@ -131,6 +135,9 @@ function CreateTodoElement(item) {
     item.dueDate = date_el.value;
     save();
 });
+        item.dueDate = date_el.value;
+        save();
+    });
 
     const actions_el = document.createElement("div");
 
@@ -157,6 +164,7 @@ function CreateTodoElement(item) {
     item_el.appendChild(status_btn_el);
     item_el.appendChild(input_el);
     item_el.appendChild(date_el);
+    item_el.appendChild(date_el); // ✅ NEW LINE
     item_el.appendChild(actions_el);
 
     input_el.addEventListener("input", () => {
